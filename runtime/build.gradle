@@ -85,7 +85,6 @@ kotlin {
             jsIrMain.dependsOn(it)
         }
         nativeMain {
-            dependsOn(commonMain)
         }
     }
 }
