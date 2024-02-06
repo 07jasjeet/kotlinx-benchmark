@@ -49,7 +49,10 @@ kotlin {
     targets.configureEach {
         compilations.configureEach {
             compilerOptions.options.with {
-                allWarningsAsErrors.set(true)
+                // TODO: Uncomment before merging to master. Currently, K2 produced warning for suppressing
+                //  NO_ACTUAL_CLASS_MEMBER_FOR_EXPECTED_CLASS and ACTUAL_WITHOUT_EXPECT, which are redundant in K2.
+                //  However, the suppresses are still relevant in K1.
+//                allWarningsAsErrors.set(true)
                 freeCompilerArgs.add("-Xexpect-actual-classes")
             }
         }
@@ -59,7 +62,13 @@ kotlin {
         kotlin.srcDirs = ["$it.name/src"]
         resources.srcDirs = ["$it.name/resources"]
         languageSettings {
-            progressiveMode = true
+            /*
+            TODO: Try to uncomment before merging to master.
+             Currently it produces the following warning when setting language version to 1.9:
+             w: '-progressive' is meaningful only for the latest language version (2.0), while this build uses 1.9
+             Compiler behavior in such mode is undefined; please, consider moving to the latest stable version or turning off progressive mode.
+             */
+//            progressiveMode = true
             languageVersion = kotlin_language_version
         }
     }
